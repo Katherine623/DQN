@@ -1,0 +1,84 @@
+對話紀錄（本次工作階段）
+日期：2026-04-29
+
+[User]
+這是甚麼?
+
+[Assistant]
+說明了你選取的是 notebook 開頭的示範程式：
+1. 以 numpy 產生隨機資料
+2. 計算平均值
+3. 以 matplotlib 畫散點圖與平均線
+4. 後面才進入 Gridworld 章節
+
+--------------------------------------------------
+
+[User]
+（提供 Homework 3 要求：HW3-1、HW3-2、HW3-3）
+
+[Assistant]
+開始依作業要求建置與修正 notebook，包含：
+1. 補齊環境套件（numpy、matplotlib、torch、pytorch-lightning）
+2. 新增作業專用區塊（Homework 3 Solutions）
+3. 加入 Naive DQN、Replay DQN、Double DQN、Dueling DQN
+4. 將 random mode 版本改寫為 PyTorch Lightning
+5. 建立並補齊 Gridworld.py、GridBoard.py 依賴
+6. 執行與驗證各段程式
+
+--------------------------------------------------
+
+[User]
+這兩個是幹嘛的
+
+[Assistant]
+解釋兩個檔案用途：
+1. GridBoard.py：棋盤資料結構與狀態表示（含 render / render_np）
+2. Gridworld.py：遊戲規則、移動合法性、reward 與模式初始化
+
+--------------------------------------------------
+
+[User]
+跟作業無關的都刪掉
+
+[Assistant]
+依需求刪除 notebook 中舊教材示範內容，只保留 Homework 3 相關區塊（共 8 個 cell）。
+
+--------------------------------------------------
+
+[User]
+都做了嗎
+
+[Assistant]
+回覆：作業要求項目皆已完成。
+1. HW3-1：已做並有結果
+2. HW3-2：已做並有比較
+3. HW3-3：已做（Lightning + 訓練技巧），但成效可再調參提升
+
+--------------------------------------------------
+
+[User]
+製作關於這幾個作業的報告.txt
+
+[Assistant]
+建立 report.txt，內容包含：
+1. Setup/Reference
+2. HW3-1 方法與結果
+3. HW3-2 比較與結果
+4. HW3-3 轉換與訓練技巧
+5. 總結
+
+--------------------------------------------------
+
+[User]
+全中文正式版
+
+[Assistant]
+將 report.txt 改寫為全中文正式版，保留實驗數據與結論。
+
+--------------------------------------------------
+
+[User]
+把我跟你的對話紀錄也變成.txt
+
+[Assistant]
+已建立本檔案：對話紀錄.txt。

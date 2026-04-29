@@ -1,0 +1,98 @@
+作業三報告：DQN 及其變體方法
+
+姓名：____________________
+課程：深度學習
+日期：2026-04-29
+
+==================================================
+一、實作基礎與參考來源
+==================================================
+本次作業以 DRL in Action 英文版 GitHub 專案為主要參考：
+https://github.com/DeepReinforcementLearning/DeepReinforcementLearningInAction/tree/master
+
+本作業使用之基準環境與工具如下：
+1. 環境程式：Gridworld.py、GridBoard.py
+2. 主實驗檔案：第3章程式_ALL_IN_ONE (1).ipynb
+3. Python 環境：本地 .venv
+4. 主要套件：torch、pytorch-lightning、numpy、matplotlib
+
+
+==================================================
+二、HW3-1：Naive DQN 與 Experience Replay 比較（static mode）
+==================================================
+（一）實作重點
+1. Naive DQN：使用當前單步轉移資料直接更新 Q-network。
+2. Replay DQN：先將經驗資料 (s, a, r, s', done) 存入記憶庫，再隨機抽樣 mini-batch 訓練。
+
+（二）理解摘要
+1. DQN 的學習目標為動作價值函數 Q(s,a)，其意義為「在狀態 s 採取動作 a 後的期望折扣報酬」。
+2. Naive DQN 因資料時間相依性高，訓練過程較容易震盪。
+3. Experience Replay 可降低樣本相關性，提升收斂穩定度。
+4. DQN 透過 Bellman target 進行回歸學習，並非分類問題。
+
+（三）實驗結果
+1. Naive DQN：wins = 0/40，win_rate = 0.00，avg_reward = -11.0
+2. Replay DQN：wins = 40/40，win_rate = 1.00，avg_reward = 4.0
+
+（四）小結
+在 static 模式下，Experience Replay 相較 Naive DQN 有明顯且穩定的效能提升。
+
+
+==================================================
+三、HW3-2：增強版 DQN 變體比較（player mode）
+==================================================
+（一）實作項目
+1. Double DQN
+2. Dueling DQN
+
+（二）比較方式
+1. 使用相同環境模式（player mode）。
+2. 以一致的訓練與評估流程進行公平比較。
+
+（三）實驗結果
+1. Vanilla DQN：wins = 50/50，win_rate = 1.00，avg_reward = 7.02
+2. Double DQN：wins = 50/50，win_rate = 1.00，avg_reward = 6.64
+3. Dueling DQN：wins = 50/50，win_rate = 1.00，avg_reward = 6.30
+
+（四）討論
+三種模型最終皆可達到滿分勝率，顯示 player 模式相對可解。此題差異主要反映在訓練過程的穩定性與震盪程度，而非最終是否能成功通關。
+
+
+==================================================
+四、HW3-3：random mode 強化與 PyTorch Lightning 轉換
+==================================================
+（一）框架轉換
+本題已將原始 PyTorch 訓練流程改寫為 PyTorch Lightning 模組化訓練方式。
+
+（二）導入之訓練穩定技巧
+1. Gradient clipping（梯度裁剪）
+2. Learning rate scheduling（學習率排程）
+3. Experience replay（經驗回放）
+4. Target network synchronization（目標網路同步）
+5. Double DQN target selection
+6. Dueling network head
+7. Wall-collision penalty（撞牆懲罰）
+
+（三）實驗結果（最新一次）
+1. wins = 11/50
+2. win_rate = 0.22
+3. avg_reward = -4.92
+
+（四）討論
+1. random mode 的難度顯著高於 static 與 player mode。
+2. 本次流程已完整且可穩定執行，但最終表現仍有優化空間。
+3. 後續可增加訓練 budget 並進一步進行超參數搜尋，例如：episodes、epsilon decay、buffer size、target sync 頻率、learning rate。
+
+
+==================================================
+五、總結
+==================================================
+（一）完成度
+1. HW3-1：已完成
+2. HW3-2：已完成
+3. HW3-3：已完成（含 PyTorch Lightning 轉換與訓練技巧整合）
+
+（二）整體結論
+1. Experience Replay 對於 DQN 訓練穩定性與效能具有明顯幫助。
+2. Double DQN 與 Dueling DQN 皆已正確實作並完成比較。
+3. 對於高隨機性的環境，僅靠架構升級仍不足，需搭配更充分的訓練與調參策略，方能進一步提升勝率。
